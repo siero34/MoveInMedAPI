@@ -5,10 +5,12 @@ import com.gestionnaire.gestionnaire.model.Patient;
 import com.gestionnaire.gestionnaire.model.Pro;
 import com.gestionnaire.gestionnaire.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.xml.ws.Response;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -44,9 +46,15 @@ public class PatientController {
     }
 
     @GetMapping(value = "/{id}")
-    public Patient chercherPatient(@PathVariable int id){
-        return patientService.findById(id);
+    public ResponseEntity<Patient> findById(@PathVariable int id) {
+        Patient patientFound = patientService.findById(id);
+
+        if(patientFound == null){
+            return new ResponseEntity("Le patient d'id "+id+" est introuvable dans la base de données!", HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(patientFound);
     }
+
 
     @GetMapping(value = "/{id}/pros")
     public Set<Pro> chercherPros(@PathVariable int id){
