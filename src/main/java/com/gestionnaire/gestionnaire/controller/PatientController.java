@@ -60,4 +60,17 @@ public class PatientController {
     public Set<Pro> chercherPros(@PathVariable int id){
         return patientService.getPros(id);
     }
+
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity delete(@PathVariable int id) {
+        Patient patient = patientService.findById(id);
+
+        if (patient == null) {
+            return new ResponseEntity("Le patient d'id "+id+" est introuvable dans la base de données",HttpStatus.BAD_REQUEST);
+        }
+
+        patientService.deleteById(id);
+
+        return ResponseEntity.ok().build();
+    }
 }

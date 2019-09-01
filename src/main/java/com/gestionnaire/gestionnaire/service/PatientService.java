@@ -20,4 +20,5 @@ public interface PatientService {
     public abstract List<Patient> findByDateDeNaissance(Date date);
     public abstract Patient update(Patient patient);
     public abstract void delete(Patient patient);
+    public abstract void deleteById(int id);
 }

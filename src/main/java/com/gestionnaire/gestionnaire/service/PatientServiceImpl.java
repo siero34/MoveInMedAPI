@@ -70,6 +70,11 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public void delete(Patient patient) {
+        patientDao.deleteById(patient.getId());
+    }
 
+    @Override
+    public void deleteById(int id){
+        patientDao.deleteById(id);
     }
 }
