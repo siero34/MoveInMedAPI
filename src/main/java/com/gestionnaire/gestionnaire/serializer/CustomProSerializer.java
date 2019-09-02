@@ -25,10 +25,10 @@ public class CustomProSerializer extends StdSerializer<Pro> {
         gen.writeStringField("nom", pro.getNom());
         gen.writeStringField("prenom", pro.getPrenom());
         gen.writeStringField("profession", pro.getDomaine().toString());
-        int i = 1;
-        for(Patient patient : pro.getPatients()){
-
-        }
+//        int i = 1;
+//        for(Patient patient : pro.getPatients()){
+//
+//        }
         gen.writeEndObject();
     }
 }

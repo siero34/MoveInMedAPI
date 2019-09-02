@@ -31,20 +31,36 @@ public class Pro implements Serializable {
     @ManyToMany(mappedBy = "pros")
     private Set<Patient> patients = new HashSet<>();
 
-    @OneToOne
-    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
-    private Adresse adresse;
+//    @OneToOne
+//    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
+//    private Adresse adresse;
+//
+//    @Column(name = "num_tel")
+//    private String numTel;
+//
+//    @Column(name = "email")
+//    private String email;
 
     public Pro() {
     }
 
-    public Pro(int id, String nom, String prenom, Domaine domaine, Set<Patient> patients, Adresse adresse) {
+//    public Pro(int id, String nom, String prenom, Domaine domaine, Set<Patient> patients, Adresse adresse, String numTel, String email) {
+//        this.id = id;
+//        this.nom = nom;
+//        this.prenom = prenom;
+//        this.domaine = domaine;
+//        this.patients = patients;
+//        this.adresse = adresse;
+//        this.numTel = numTel;
+//        this.email = email;
+//    }
+
+    public Pro(int id, String nom, String prenom, Domaine domaine, Set<Patient> patients) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.domaine = domaine;
         this.patients = patients;
-        this.adresse = adresse;
     }
 
     public int getId() {
@@ -97,11 +113,27 @@ public class Pro implements Serializable {
         patient.getPros().remove(this);
     }
 
-    public Adresse getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
+//    public Adresse getAdresse() {
+//        return adresse;
+//    }
+//
+//    public void setAdresse(Adresse adresse) {
+//        this.adresse = adresse;
+//    }
+//
+//    public String getNumTel() {
+//        return numTel;
+//    }
+//
+//    public void setNumTel(String numTel) {
+//        this.numTel = numTel;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 }

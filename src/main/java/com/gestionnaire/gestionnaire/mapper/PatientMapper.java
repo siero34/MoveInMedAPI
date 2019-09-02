@@ -11,7 +11,7 @@ public class PatientMapper {
         patientDto.setNom(patient.getNom());
         patientDto.setPrenom(patient.getPrenom());
         patientDto.setPro(patient.getPro());
-        patientDto.setPros(patient.getPros());
+//        patientDto.setPros(patient.getPros());
 
         return patientDto;
     }

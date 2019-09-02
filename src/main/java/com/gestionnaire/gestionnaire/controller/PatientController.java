@@ -4,6 +4,7 @@ import com.gestionnaire.gestionnaire.dao.PatientDao;
 import com.gestionnaire.gestionnaire.model.Patient;
 import com.gestionnaire.gestionnaire.model.Pro;
 import com.gestionnaire.gestionnaire.service.PatientService;
+import com.gestionnaire.gestionnaire.service.ProService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,9 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    private ProService proService;
+
     @GetMapping
     public List<Patient> listePatients(){
         return patientService.findAll();
@@ -31,10 +35,20 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity<Void> ajouterPatient(@RequestBody Patient patient){
+
+        if(patient.getPro() != null) {
+            Pro pro = proService.findById(patient.getPro().getId());
+            if (pro == null) {
+                return new ResponseEntity("Le pro d'id " + patient.getPro().getId() + " est introuvable dans la base de données", HttpStatus.BAD_REQUEST);
+            }
+        }
+
         Patient patientAdded = patientService.save(patient);
 
         if(patientAdded == null)
             return ResponseEntity.noContent().build();
+
+
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

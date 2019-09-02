@@ -32,7 +32,6 @@ public class Patient implements Serializable {
     @JoinColumn(name = "pro_id")
     private Pro pro;
 
-    @JsonManagedReference
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE})
@@ -41,23 +40,34 @@ public class Patient implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "pro_id"))
     private Set<Pro> pros = new HashSet<>();
 
-    @JsonFormat(pattern="dd-MM-yyyy")
-    @Column(name = "date_de_naissance")
-    private Date dateDeNaissance;
+//    @JsonFormat(pattern="dd-MM-yyyy")
+//    @Column(name = "date_de_naissance")
+//    private Date dateDeNaissance;
 
-    @OneToOne
-    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
-    private Adresse adresse;
+//    @OneToOne
+//    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
+//    private Adresse adresse;
+//
+//    @Column(name = "num_tel")
+//    private String numTel;
+//
+//    @Column(name = "email")
+//    private String email;
 
     public Patient() {
     }
 
-    public Patient(int id, String nom, String prenom, Pro pro) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.pro = pro;
-    }
+//    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance, Adresse adresse, String numTel, String email) {
+//        this.id = id;
+//        this.nom = nom;
+//        this.prenom = prenom;
+//        this.pro = pro;
+//        this.pros = pros;
+//        this.dateDeNaissance = dateDeNaissance;
+//        this.adresse = adresse;
+//        this.numTel = numTel;
+//        this.email = email;
+//    }
 
     public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros) {
         this.id = id;
@@ -67,28 +77,7 @@ public class Patient implements Serializable {
         this.pros = pros;
     }
 
-    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.pro = pro;
-        this.pros = pros;
-        this.dateDeNaissance = dateDeNaissance;
-    }
-
-    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance, Adresse adresse) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.pro = pro;
-        this.pros = pros;
-        this.dateDeNaissance = dateDeNaissance;
-        this.adresse = adresse;
-    }
-
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public void setId(int id) {
         this.id = id;
@@ -136,19 +125,35 @@ public class Patient implements Serializable {
         pro.getPatients().remove(this);
     }
 
-    public Date getDateDeNaissance() {
-        return dateDeNaissance;
-    }
-
-    public void setDateDeNaissance(Date dateDeNaissance) {
-        this.dateDeNaissance = dateDeNaissance;
-    }
-
-    public Adresse getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
+//    public Date getDateDeNaissance() {
+//        return dateDeNaissance;
+//    }
+//
+//    public void setDateDeNaissance(Date dateDeNaissance) {
+//        this.dateDeNaissance = dateDeNaissance;
+//    }
+//
+//    public Adresse getAdresse() {
+//        return adresse;
+//    }
+//
+//    public void setAdresse(Adresse adresse) {
+//        this.adresse = adresse;
+//    }
+//
+//    public String getNumTel() {
+//        return numTel;
+//    }
+//
+//    public void setNumTel(String numTel) {
+//        this.numTel = numTel;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 }
