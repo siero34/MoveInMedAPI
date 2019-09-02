@@ -1,12 +1,14 @@
 package com.gestionnaire.gestionnaire.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.gestionnaire.gestionnaire.serializer.CustomPatientSerializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +41,11 @@ public class Patient implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "pro_id"))
     private Set<Pro> pros = new HashSet<>();
 
+    @JsonFormat(pattern="dd-MM-yyyy")
+    @Column(name = "date_de_naissance")
+    private Date dateDeNaissance;
+
+    
 
     public Patient() {
     }
@@ -56,6 +63,15 @@ public class Patient implements Serializable {
         this.prenom = prenom;
         this.pro = pro;
         this.pros = pros;
+    }
+
+    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.pro = pro;
+        this.pros = pros;
+        this.dateDeNaissance = dateDeNaissance;
     }
 
     public int getId() {
@@ -106,5 +122,13 @@ public class Patient implements Serializable {
     public void removePro(Pro pro){
         this.pros.remove(pro);
         pro.getPatients().remove(this);
+    }
+
+    public Date getDateDeNaissance() {
+        return dateDeNaissance;
+    }
+
+    public void setDateDeNaissance(Date dateDeNaissance) {
+        this.dateDeNaissance = dateDeNaissance;
     }
 }

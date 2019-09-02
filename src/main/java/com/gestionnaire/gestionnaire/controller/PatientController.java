@@ -62,7 +62,7 @@ public class PatientController {
     }
 
     @DeleteMapping(value = "{id}")
-    public ResponseEntity delete(@PathVariable int id) {
+    public ResponseEntity<Void> delete(@PathVariable int id) {
         Patient patient = patientService.findById(id);
 
         if (patient == null) {
@@ -72,5 +72,14 @@ public class PatientController {
         patientService.deleteById(id);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Patient> update(@PathVariable int id, @RequestBody Patient patient) {
+        if(patientService.findById(id) == null){
+            return new ResponseEntity("Le patient d'id "+id+" est introuvable dans la base de données", HttpStatus.BAD_REQUEST);
+        }
+
+        return ResponseEntity.ok(patientService.save(patient));
     }
 }
