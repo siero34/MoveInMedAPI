@@ -31,29 +31,20 @@ public class Pro implements Serializable {
     @ManyToMany(mappedBy = "pros")
     private Set<Patient> patients = new HashSet<>();
 
+    @OneToOne
+    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
+    private Adresse adresse;
 
     public Pro() {
     }
 
-    public Pro(int id, String nom, String prenom) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-    }
-
-    public Pro(int id, String nom, String prenom, Domaine domaine) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.domaine = domaine;
-    }
-
-    public Pro(int id, String nom, String prenom, Domaine domaine, Set<Patient> patients) {
+    public Pro(int id, String nom, String prenom, Domaine domaine, Set<Patient> patients, Adresse adresse) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.domaine = domaine;
         this.patients = patients;
+        this.adresse = adresse;
     }
 
     public int getId() {
@@ -104,5 +95,13 @@ public class Pro implements Serializable {
     public void removePatient(Patient patient){
         this.patients.remove(patient);
         patient.getPros().remove(this);
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 }

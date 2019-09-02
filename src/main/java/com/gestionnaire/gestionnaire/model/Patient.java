@@ -45,7 +45,9 @@ public class Patient implements Serializable {
     @Column(name = "date_de_naissance")
     private Date dateDeNaissance;
 
-    
+    @OneToOne
+    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
+    private Adresse adresse;
 
     public Patient() {
     }
@@ -72,6 +74,16 @@ public class Patient implements Serializable {
         this.pro = pro;
         this.pros = pros;
         this.dateDeNaissance = dateDeNaissance;
+    }
+
+    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance, Adresse adresse) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.pro = pro;
+        this.pros = pros;
+        this.dateDeNaissance = dateDeNaissance;
+        this.adresse = adresse;
     }
 
     public int getId() {
@@ -130,5 +142,13 @@ public class Patient implements Serializable {
 
     public void setDateDeNaissance(Date dateDeNaissance) {
         this.dateDeNaissance = dateDeNaissance;
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 }
