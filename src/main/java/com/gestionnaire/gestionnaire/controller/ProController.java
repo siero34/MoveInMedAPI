@@ -2,16 +2,19 @@ package com.gestionnaire.gestionnaire.controller;
 
 
 import com.gestionnaire.gestionnaire.dao.ProDao;
+import com.gestionnaire.gestionnaire.model.Domaine;
 import com.gestionnaire.gestionnaire.model.Patient;
 import com.gestionnaire.gestionnaire.model.Pro;
 import com.gestionnaire.gestionnaire.service.ProService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -52,4 +55,23 @@ public class ProController {
         return ResponseEntity.ok(proFound);
     }
 
+    @GetMapping(value = "/search")
+    public ResponseEntity<List<Pro>> search(
+            @RequestParam(required = false) String nom,
+            @RequestParam(required = false) String prenom,
+            @RequestParam(required = false) String domaine){
+
+        if((nom == null)&&(prenom == null)&&(domaine == null))
+            return new ResponseEntity("Entrez au moins un paramètre", HttpStatus.BAD_REQUEST);
+
+        if(domaine != null)
+            return ResponseEntity.ok(proService.search(nom, prenom, Domaine.valueOf(domaine)));
+
+        return ResponseEntity.ok(proService.search(nom, prenom, null));
+    }
+
+    @GetMapping(value = "/domaine")
+    public ResponseEntity<List<Pro>> findByDomaine(@RequestParam String domaine){
+        return ResponseEntity.ok(proService.findByDomaine(Domaine.valueOf(domaine)));
+    }
 }

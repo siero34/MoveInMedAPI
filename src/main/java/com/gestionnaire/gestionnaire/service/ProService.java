@@ -20,4 +20,5 @@ public interface ProService {
     public abstract List<Pro> findByDomaine(Domaine domaine);
     public abstract Pro update(Pro pro);
     public abstract void delete(Pro pro);
+    public abstract List<Pro> search(String nom, String prenom, Domaine domaine);
 }

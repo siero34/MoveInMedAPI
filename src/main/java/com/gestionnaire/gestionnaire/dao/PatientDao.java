@@ -16,4 +16,6 @@ public interface PatientDao extends JpaRepository<Patient, Integer> {
     List<Patient> findByDateDeNaissance(LocalDate date);
     List<Patient> findByPrenom(String prenom);
     List<Patient> findByNomAndPrenomAndDateDeNaissance(String nom, String prenom, LocalDate date);
+    List<Patient> findByNomLike(String nom);
+    List<Patient> findByPrenomLike(String prenom);
 }

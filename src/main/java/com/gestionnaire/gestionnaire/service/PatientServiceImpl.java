@@ -74,23 +74,27 @@ public class PatientServiceImpl implements PatientService{
 
         // Si le paramètre "nom" est présent, on récupère tous les patients dont le nom correspondent
         if(nom != null)
-            patients = patientDao.findByNom(nom);
+            patients = patientDao.findByNomLike("%"+nom+"%");
 
         // Si le paramètre "prenom" est présent
         if(prenom != null){
+
             /* On vérifie tout d'abord si la liste a déjà été peuplée pour éviter d'effectuer l'opération retainAll
             avec une liste vide qui supprimerait tous les résultats précédents*/
             if(patients.isEmpty())
-                patients = patientDao.findByPrenom(prenom);
+                patients = patientDao.findByPrenomLike("%"+prenom+"%");
+
             // Sinon on effectue une intersection des deux listes
-            patients.retainAll(patientDao.findByPrenom(prenom));
+            patients.retainAll(patientDao.findByPrenomLike("%"+prenom+"%"));
         }
 
         // Si le paramètre "date" est présent
         if(date != null){
+
             // On effectue la même vérification que pour le prenom
             if(patients.isEmpty())
                 patients = patientDao.findByDateDeNaissance(date);
+
             // On effectue une nouvelle intersection, qui simulera une intersection des trois listes
             patients.retainAll(patientDao.findByDateDeNaissance(date));
         }
