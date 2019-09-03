@@ -3,7 +3,9 @@ package com.gestionnaire.gestionnaire.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.gestionnaire.gestionnaire.serializer.CustomPatientDeserializer;
 import com.gestionnaire.gestionnaire.serializer.CustomPatientSerializer;
 
 import javax.persistence.*;
@@ -14,6 +16,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="patient")
+@JsonDeserialize(using = CustomPatientDeserializer.class)
 //@JsonSerialize(using = CustomPatientSerializer.class)
 public class Patient implements Serializable {
 
@@ -32,49 +35,50 @@ public class Patient implements Serializable {
     @JoinColumn(name = "pro_id")
     private Pro pro;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE})
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "relation",
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "pro_id"))
     private Set<Pro> pros = new HashSet<>();
 
-//    @JsonFormat(pattern="dd-MM-yyyy")
-//    @Column(name = "date_de_naissance")
-//    private Date dateDeNaissance;
+    @JsonFormat(pattern="dd-MM-yyyy")
+    @Column(name = "date_de_naissance")
+    private Date dateDeNaissance;
 
-//    @OneToOne
-//    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
-//    private Adresse adresse;
-//
-//    @Column(name = "num_tel")
-//    private String numTel;
-//
-//    @Column(name = "email")
-//    private String email;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "adresse_id", referencedColumnName = "id")
+    private Adresse adresse;
+
+    @Column(name = "num_tel")
+    private String numTel;
+
+    @Column(name = "email")
+    private String email;
 
     public Patient() {
     }
 
-//    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance, Adresse adresse, String numTel, String email) {
-//        this.id = id;
-//        this.nom = nom;
-//        this.prenom = prenom;
-//        this.pro = pro;
-//        this.pros = pros;
-//        this.dateDeNaissance = dateDeNaissance;
-//        this.adresse = adresse;
-//        this.numTel = numTel;
-//        this.email = email;
-//    }
-
-    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros) {
+    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance, Adresse adresse, String numTel, String email) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.pro = pro;
         this.pros = pros;
+        this.dateDeNaissance = dateDeNaissance;
+        this.adresse = adresse;
+        this.numTel = numTel;
+        this.email = email;
+    }
+
+    public Patient(String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance, Adresse adresse, String numTel, String email) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.pro = pro;
+        this.pros = pros;
+        this.dateDeNaissance = dateDeNaissance;
+        this.adresse = adresse;
+        this.numTel = numTel;
+        this.email = email;
     }
 
     public int getId() { return id; }
@@ -125,35 +129,35 @@ public class Patient implements Serializable {
         pro.getPatients().remove(this);
     }
 
-//    public Date getDateDeNaissance() {
-//        return dateDeNaissance;
-//    }
-//
-//    public void setDateDeNaissance(Date dateDeNaissance) {
-//        this.dateDeNaissance = dateDeNaissance;
-//    }
-//
-//    public Adresse getAdresse() {
-//        return adresse;
-//    }
-//
-//    public void setAdresse(Adresse adresse) {
-//        this.adresse = adresse;
-//    }
-//
-//    public String getNumTel() {
-//        return numTel;
-//    }
-//
-//    public void setNumTel(String numTel) {
-//        this.numTel = numTel;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
+    public Date getDateDeNaissance() {
+        return dateDeNaissance;
+    }
+
+    public void setDateDeNaissance(Date dateDeNaissance) {
+        this.dateDeNaissance = dateDeNaissance;
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getNumTel() {
+        return numTel;
+    }
+
+    public void setNumTel(String numTel) {
+        this.numTel = numTel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

@@ -28,6 +28,12 @@ public class Adresse {
         this.zipCode = zipCode;
     }
 
+    public Adresse(String adresse, String ville, int zipCode) {
+        this.adresse = adresse;
+        this.ville = ville;
+        this.zipCode = zipCode;
+    }
+
     public Adresse() {
     }
 

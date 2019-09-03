@@ -43,12 +43,11 @@ public class PatientController {
             }
         }
 
+
         Patient patientAdded = patientService.save(patient);
 
         if(patientAdded == null)
             return ResponseEntity.noContent().build();
-
-
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
