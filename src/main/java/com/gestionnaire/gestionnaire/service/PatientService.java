@@ -3,6 +3,7 @@ package com.gestionnaire.gestionnaire.service;
 import com.gestionnaire.gestionnaire.model.Patient;
 import com.gestionnaire.gestionnaire.model.Pro;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -15,10 +16,8 @@ public interface PatientService {
     public abstract Patient save(Patient patient);
     public abstract List<Patient> sortByNom(String nom);
     public abstract List<Patient> sortByPrenom(String prenom);
-    public abstract List<Patient> findByNom(String nom);
-    public abstract List<Patient> findByPrenom(String Prenom);
-    public abstract List<Patient> findByDateDeNaissance(Date date);
     public abstract Patient update(Patient patient);
     public abstract void delete(Patient patient);
     public abstract void deleteById(int id);
+    public abstract List<Patient> search(String nom, String prenom, LocalDate date);
 }

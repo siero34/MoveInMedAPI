@@ -6,6 +6,7 @@ import com.gestionnaire.gestionnaire.model.Pro;
 import com.gestionnaire.gestionnaire.service.PatientService;
 import com.gestionnaire.gestionnaire.service.ProService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.xml.ws.Response;
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -95,4 +98,18 @@ public class PatientController {
 
         return ResponseEntity.ok(patientService.save(patient));
     }
+
+    @GetMapping(value = "/search")
+    public ResponseEntity<List<Patient>> search(
+            @RequestParam(required = false) String nom,
+            @RequestParam(required = false) String prenom,
+            @RequestParam(required = false)@DateTimeFormat(pattern="dd-MM-yyyy") LocalDate date){
+
+        if((nom == null)&&(prenom == null)&&(date == null))
+            return new ResponseEntity("Entrez au moins un paramètre", HttpStatus.BAD_REQUEST);
+
+        return ResponseEntity.ok(patientService.search(nom, prenom, date));
+
+    }
+
 }

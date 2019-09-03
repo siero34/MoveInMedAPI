@@ -1,7 +1,6 @@
 package com.gestionnaire.gestionnaire.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.gestionnaire.gestionnaire.views.View;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,7 +30,7 @@ public class Pro implements Serializable {
     @ManyToMany(mappedBy = "pros")
     private Set<Patient> patients = new HashSet<>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "adresse_id", referencedColumnName = "id")
     private Adresse adresse;
 
@@ -55,12 +54,13 @@ public class Pro implements Serializable {
         this.email = email;
     }
 
-    public Pro(int id, String nom, String prenom, Domaine domaine, Set<Patient> patients) {
-        this.id = id;
+    public Pro(String nom, String prenom, Domaine domaine, Adresse adresse, String numTel, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.domaine = domaine;
-        this.patients = patients;
+        this.adresse = adresse;
+        this.numTel = numTel;
+        this.email = email;
     }
 
     public Pro(int id) {

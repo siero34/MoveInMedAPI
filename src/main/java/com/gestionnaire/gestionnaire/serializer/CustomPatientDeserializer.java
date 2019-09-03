@@ -12,13 +12,12 @@ import com.gestionnaire.gestionnaire.model.Patient;
 import com.gestionnaire.gestionnaire.model.Pro;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class CustomPatientDeserializer extends StdDeserializer<Patient> {
 
@@ -35,10 +34,10 @@ public class CustomPatientDeserializer extends StdDeserializer<Patient> {
     public Patient deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         JsonNode node = p.getCodec().readTree(p);
 
-        // Récupération du champ "nom"
+        // Récupération du nom
         String nomPatient = node.get("nom").asText();
 
-        // Récupération du champ "prenom"
+        // Récupération du prenom
         String prenomPatient = node.get("prenom").asText();
 
         // Récupération de l'id du professionnel traitant
@@ -49,19 +48,14 @@ public class CustomPatientDeserializer extends StdDeserializer<Patient> {
         if (node.has("liste_pros") && node.get("liste_pros").isArray() && node.get("liste_pros").size() > 0) {
             for (JsonNode jsonNode : node.get("liste_pros")) {
                 int proid = jsonNode.asInt();
-                pros_ids.add(new Pro(proid));
+                if(proid != proId)
+                    pros_ids.add(new Pro(proid));
             }
         }
 
         // Récupération de la date et transformation en objet Date
         String dateDeNaissancePatient = node.get("date_de_naissance").asText();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = new Date();
-        try {
-            date = formatter.parse(dateDeNaissancePatient);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        LocalDate date = LocalDate.parse(dateDeNaissancePatient, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         // Récupération de l'adresse mail
         String emailPatient = node.get("email").asText();
@@ -73,7 +67,7 @@ public class CustomPatientDeserializer extends StdDeserializer<Patient> {
         Adresse adressePatient = new Adresse(
                 node.at("/adresse/adresse").asText(),
                 node.at("/adresse/ville").asText(),
-                node.at("/adresse/zip_code").asInt());
+                node.at("/adresse/zipCode").asInt());
 
 
         return new Patient(nomPatient, prenomPatient, new Pro(proId), pros_ids, date, adressePatient, numPatient, emailPatient);

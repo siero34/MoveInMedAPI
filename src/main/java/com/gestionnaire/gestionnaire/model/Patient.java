@@ -1,15 +1,12 @@
 package com.gestionnaire.gestionnaire.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.gestionnaire.gestionnaire.serializer.CustomPatientDeserializer;
-import com.gestionnaire.gestionnaire.serializer.CustomPatientSerializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,7 +40,7 @@ public class Patient implements Serializable {
 
     @JsonFormat(pattern="dd-MM-yyyy")
     @Column(name = "date_de_naissance")
-    private Date dateDeNaissance;
+    private LocalDate dateDeNaissance;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "adresse_id", referencedColumnName = "id")
@@ -58,7 +55,7 @@ public class Patient implements Serializable {
     public Patient() {
     }
 
-    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance, Adresse adresse, String numTel, String email) {
+    public Patient(int id, String nom, String prenom, Pro pro, Set<Pro> pros, LocalDate dateDeNaissance, Adresse adresse, String numTel, String email) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -70,7 +67,7 @@ public class Patient implements Serializable {
         this.email = email;
     }
 
-    public Patient(String nom, String prenom, Pro pro, Set<Pro> pros, Date dateDeNaissance, Adresse adresse, String numTel, String email) {
+    public Patient(String nom, String prenom, Pro pro, Set<Pro> pros, LocalDate dateDeNaissance, Adresse adresse, String numTel, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.pro = pro;
@@ -129,11 +126,11 @@ public class Patient implements Serializable {
         pro.getPatients().remove(this);
     }
 
-    public Date getDateDeNaissance() {
+    public LocalDate getDateDeNaissance() {
         return dateDeNaissance;
     }
 
-    public void setDateDeNaissance(Date dateDeNaissance) {
+    public void setDateDeNaissance(LocalDate dateDeNaissance) {
         this.dateDeNaissance = dateDeNaissance;
     }
 
