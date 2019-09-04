@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "5d824018-b7ec-4366-90fa-66adfa3b3b71",
+		"name": "moveinmed",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "initialisation",
+			"item": [
+				{
+					"name": "add pro 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Hervé\",\r\n    \"prenom\": \"Mathieu\",\r\n    \"domaine\": \"generaliste\",\r\n    \"numTel\": \"0467541307\",\r\n    \"email\": \"mathieu.herve@orange.fr\",\r\n    \"adresse\": {\r\n    \t\"adresse\":\"Rue Alfred de Musset\",\r\n    \t\"ville\": \"Montpellier\",\r\n    \t\"zipCode\": 34090\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/pros",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add pro 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Duquenne\",\r\n    \"prenom\": \"Jean-Guilhem\",\r\n    \"domaine\": \"generaliste\",\r\n    \"numTel\": \"0467630714\",\r\n    \"email\": \"duquenne@free.fr\",\r\n    \"adresse\": {\r\n    \t\"adresse\":\"1444 Route de Mende\",\r\n    \t\"ville\": \"Montpellier\",\r\n    \t\"zipCode\": 34090\r\n    }\r\n}\r\n"
+						},
+						"url": {
+							"raw": "localhost:9000/pros",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add pro 3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\": \"Fernandez\",\r\n    \"prenom\": \"Sarah\",\r\n    \"domaine\": \"psy\",\r\n    \"numTel\": \"0610277389\",\r\n    \"email\": \"sfernandez.psy@gmail.com\",\r\n    \"adresse\": {\r\n    \t\"adresse\":\"568 Rue de la Roqueturière\",\r\n    \t\"ville\": \"Montpellier\",\r\n    \t\"zipCode\": 34090\r\n    }\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "localhost:9000/pros",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ajouter patient 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Le\",\n    \"prenom\": \"Teddy\",\n    \"pro_id\": 2,\n    \"date_de_naissance\": \"14-11-1994\",\n    \"liste_pros\": [1,2],\n    \"num_tel\": \"0646782017\",\n    \"email\": \"teddyle257@gmail.com\",\n    \"adresse\": {\n        \"adresse\": \"135 rue de la Chenaie\",\n        \"ville\": \"Montpellier\",\n        \"zipCode\": 34090\n    }\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ajouter patient 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Dalmau\",\n    \"prenom\": \"Mickael\",\n    \"pro_id\": 3,\n    \"date_de_naissance\": \"08-03-1995\",\n    \"liste_pros\": [1,2,3],\n    \"num_tel\": \"0788905648\",\n    \"email\": \"dalmau.mickael@gmail.com\",\n    \"adresse\": {\n        \"adresse\": \"14 rue Révolution\",\n        \"ville\": \"Sète\",\n        \"zipCode\": 34200\n    }\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ajouter patient 3",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Le\",\n    \"prenom\": \"Keny\",\n    \"pro_id\": 3,\n    \"date_de_naissance\": \"23-10-1991\",\n    \"liste_pros\": [],\n    \"num_tel\": \"0658941023\",\n    \"email\": \"keny.le@gmail.com\",\n    \"adresse\": {\n        \"adresse\": \"2 impasse André Masson\",\n        \"ville\": \"Sète\",\n        \"zipCode\": 34200\n    }\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "patient",
+			"item": [
+				{
+					"name": "find by id 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/patients/3",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"patients",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete patient 3",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/patients/3",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"patients",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/patients/3",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"patients",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update patient 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nom\": \"Benjamin\",\n    \"prenom\": \"Violin\",\n    \"pro_id\": 2,\n    \"date_de_naissance\": \"21-01-1994\",\n    \"liste_pros\": [1,2],\n    \"num_tel\": \"0646782017\",\n    \"email\": \"teddyle257@gmail.com\",\n    \"adresse\": {\n        \"adresse\": \"135 rue de la Chenaie\",\n        \"ville\": \"Montpellier\",\n        \"zipCode\": 34090\n    }\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/patients",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pro",
+			"item": [
+				{
+					"name": "find by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/pros/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pros",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete pro",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9000/pros/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"pros",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update pro 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
