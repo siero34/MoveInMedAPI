@@ -47,3 +47,7 @@ As patients have a foreign key of a pro, you may first create a pro before creat
 Deleting on cascade is not supported, if you delete a pro, and its foreign key is contained in a patient, you cannot delete it.<br>
 
 A new address object is created everytime you create a patient/pro.<br>
+
+Date format is : dd-MM-yyyy <br>
+
+Domain value : generaliste, psy, kine, assistante, chirurgien, infirmier
