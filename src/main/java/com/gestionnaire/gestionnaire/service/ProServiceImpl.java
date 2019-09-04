@@ -47,29 +47,16 @@ public class ProServiceImpl implements ProService {
         return null;
     }
 
-    @Override
-    public List<Pro> findByNom(String nom) {
-        return null;
-    }
-
-    @Override
-    public List<Pro> findByPrenom(String Prenom) {
-        return null;
-    }
-
-    @Override
-    public List<Pro> findByDomaine(Domaine domaine) {
-        return proDao.findByDomaine(domaine);
-    }
 
     @Override
     public Pro update(Pro pro) {
-        return null;
+
+        return proDao.save(pro);
     }
 
     @Override
-    public void delete(Pro pro) {
-
+    public void deleteById(int id){
+        proDao.deleteById(id);
     }
 
     @Override

@@ -9,16 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class PatientServiceImpl implements PatientService{
 
     @Autowired
     PatientDao patientDao;
+
+    @Autowired
+    ProDao proDao;
 
     @Override
     public Set<Pro> getPros(int id) {
@@ -37,9 +37,7 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient save(Patient patient) {
-        return patientDao.save(patient);
-    }
+    public Patient save(Patient patient) { return patientDao.save(patient); }
 
     @Override
     public List<Patient> sortByNom(String nom) {
@@ -53,12 +51,13 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public Patient update(Patient patient) {
-        return null;
-    }
-
-    @Override
-    public void delete(Patient patient) {
-        patientDao.deleteById(patient.getId());
+        Set<Pro> pros = new HashSet<>();
+        for(Pro pro : patient.getPros()){
+            if(pro.getId() != patient.getPro().getId())
+                pros.add(proDao.findById(pro.getId()));
+        }
+        patient.setPros(pros);
+        return patientDao.save(patient);
     }
 
     @Override

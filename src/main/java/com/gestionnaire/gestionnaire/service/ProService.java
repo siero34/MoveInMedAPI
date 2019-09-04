@@ -15,10 +15,7 @@ public interface ProService {
     public abstract Pro save(Pro pro);
     public abstract List<Pro> sortByNom(String nom);
     public abstract List<Pro> sortByPrenom(String prenom);
-    public abstract List<Pro> findByNom(String nom);
-    public abstract List<Pro> findByPrenom(String Prenom);
-    public abstract List<Pro> findByDomaine(Domaine domaine);
     public abstract Pro update(Pro pro);
-    public abstract void delete(Pro pro);
     public abstract List<Pro> search(String nom, String prenom, Domaine domaine);
+    public abstract void deleteById(int id);
 }

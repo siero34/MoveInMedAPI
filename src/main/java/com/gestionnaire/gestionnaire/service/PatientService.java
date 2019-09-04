@@ -17,7 +17,6 @@ public interface PatientService {
     public abstract List<Patient> sortByNom(String nom);
     public abstract List<Patient> sortByPrenom(String prenom);
     public abstract Patient update(Patient patient);
-    public abstract void delete(Patient patient);
     public abstract void deleteById(int id);
     public abstract List<Patient> search(String nom, String prenom, LocalDate date);
 }

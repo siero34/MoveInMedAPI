@@ -37,7 +37,7 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> ajouterPatient(@RequestBody Patient patient){
+    public ResponseEntity<Void> addPatient(@RequestBody Patient patient){
 
         if(patient.getPro() != null) {
             Pro pro = proService.findById(patient.getPro().getId());
@@ -73,7 +73,7 @@ public class PatientController {
 
 
     @GetMapping(value = "/{id}/pros")
-    public Set<Pro> chercherPros(@PathVariable int id){
+    public Set<Pro> listePros(@PathVariable int id){
         return patientService.getPros(id);
     }
 
@@ -87,7 +87,7 @@ public class PatientController {
 
         patientService.deleteById(id);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
@@ -95,8 +95,8 @@ public class PatientController {
         if(patientService.findById(id) == null){
             return new ResponseEntity("Le patient d'id "+id+" est introuvable dans la base de données", HttpStatus.BAD_REQUEST);
         }
-
-        return ResponseEntity.ok(patientService.save(patient));
+        patient.setId(id);
+        return ResponseEntity.ok(patientService.update(patient));
     }
 
     @GetMapping(value = "/search")

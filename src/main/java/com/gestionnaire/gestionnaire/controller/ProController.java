@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/pros")
@@ -70,8 +71,30 @@ public class ProController {
         return ResponseEntity.ok(proService.search(nom, prenom, null));
     }
 
-    @GetMapping(value = "/domaine")
-    public ResponseEntity<List<Pro>> findByDomaine(@RequestParam String domaine){
-        return ResponseEntity.ok(proService.findByDomaine(Domaine.valueOf(domaine)));
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id) {
+        Pro pro = proService.findById(id);
+
+        if (pro == null) {
+            return new ResponseEntity("Le pro d'id "+id+" est introuvable dans la base de données",HttpStatus.BAD_REQUEST);
+        }
+
+        proService.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/patients")
+    public Set<Patient> listePros(@PathVariable int id){
+        return proService.getPatients(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Pro> update(@PathVariable int id, @RequestBody Pro pro) {
+        if(proService.findById(id) == null){
+            return new ResponseEntity("Le pro d'id "+id+" est introuvable dans la base de données", HttpStatus.BAD_REQUEST);
+        }
+        pro.setId(id);
+        return ResponseEntity.ok(proService.update(pro));
     }
 }
