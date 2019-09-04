@@ -38,5 +38,12 @@ There is no need to import a schema.sql file.
 
 ## BE AWARE
 
-Most of research are case sensitive, so be careful !
+Most of research are case sensitive, so be careful !<br>
 
+No verification are made for cellphone numbers and email address, since they are simple Strings to make things easier.<br>
+
+As patients have a foreign key of a pro, you may first create a pro before creating a patient.<br>
+
+Deleting on cascade is not supported, if you delete a pro, and its foreign key is contained in a patient, you cannot delete it.<br>
+
+A new address object is created everytime you create a patient/pro.<br>
